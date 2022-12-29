@@ -11,6 +11,9 @@ import {environment} from "../environments/environment";
 import {AuthService} from "./services/auth.service";
 import { HeaderComponent } from './components/header/header.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {AgmCoreModule} from '@agm/core';
+import { MapComponent } from './components/map/map.component';
+
 
 
 @NgModule({
@@ -18,14 +21,18 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     CalendarEventsComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    NgbModule
+    NgbModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyChg7CrYViIGlXMInPhAgZO1ZJm8j-4Vtc'
+    })
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
