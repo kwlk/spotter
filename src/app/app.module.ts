@@ -16,13 +16,14 @@ import { MapComponent } from './components/map/map.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     CalendarEventsComponent,
     LoginComponent,
     HeaderComponent,
-    MapComponent
+    MapComponent,
   ],
   imports: [
     BrowserModule,
