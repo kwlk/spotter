@@ -1,0 +1,15 @@
+<p>Map with events:</p>
+
+<ul class="list-group">
+  <li *ngFor="let event of events">
+      <span class="name">{{event.id}}  </span>
+      <span class="name">{{event.title}}</span>
+  </li>
+</ul>
+<div [hidden]="isDisplay" *ngIf="event">
+  {{event.title}}
+</div>
+<agm-map [latitude]="defaultLat" [longitude]="defaultLan">
+  <agm-marker [latitude]="event.lat" [longitude]="event.long" *ngFor="let event of events" (markerClick)="toggleDisplay(event)"></agm-marker>
+</agm-map>
+
