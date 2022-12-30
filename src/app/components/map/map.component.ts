@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {EVENTS} from "../../mock-events";
+import {EventService} from '../../services/event.service'
 import {CalendarEvent} from "../../interfaces/CalendarEvent";
 
 
@@ -10,15 +11,27 @@ import {CalendarEvent} from "../../interfaces/CalendarEvent";
 })
 export class MapComponent {
 
+  events: CalendarEvent[] = [];
   isDisplay = false;
-  events = EVENTS;
-  event : CalendarEvent | null = null;
+  event : CalendarEvent;
   readonly defaultLat = 50.04;
   readonly defaultLan = 19.56;
 
-  toggleDisplay(event: CalendarEvent) {
-    //this.isDisplay;//= !this.isDisplay;
+  constructor(private eventService: EventService) {}
+
+  toggleDisplay(event?: CalendarEvent) {
+    //this.isDisplay= !this.isDisplay;
+
     this.event = event;
 
+  }
+
+  getEvents(): void {
+    this.events = this.eventService.getEvents();
+  }
+
+
+  ngOnInit(): void {
+    this.getEvents();
   }
 }

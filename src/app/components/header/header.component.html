@@ -12,13 +12,18 @@
         <li class="nav-item ">
           <a class="nav-link active" aria-current="page" routerLink="/map">Map</a>
         </li>
-
+        <li class="nav-item" *ngIf="afAuth.authState | async as user" >
+          <a class="nav-link text-nowrap active" aria-current="page" routerLink="/map">User panel</a>
+        </li>
       </ul>
+      <div class="container">
+        <span class="navbar-nav justify-content-center"><h2>{{title}}</h2></span>
+      </div>
       <div class="profile-container d-flex flex-row-reverse" *ngIf="afAuth.authState | async as user">
         <div>
           <span class="p-2"> User: </span>
           <span class="p-2">{{user.displayName}}</span>
-          <span class="p-2"><button class="nav-link p-2" (click)="authService.signOut()">sign out</button></span>
+          <span class="p-2 "><button class="nav-link p-2 d-inline" (click)="authService.signOut()">sign out</button></span>
         </div>
       </div>
   </div>

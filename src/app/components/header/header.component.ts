@@ -8,6 +8,7 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  title = 'Spotter';
 
   constructor(public authService: AuthService, public afAuth: AngularFireAuth) { }
 

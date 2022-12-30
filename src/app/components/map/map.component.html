@@ -7,9 +7,15 @@
   </li>
 </ul>
 <div [hidden]="isDisplay" *ngIf="event">
-  {{event.title}}
+  <h2>{{event.title | uppercase}} Details</h2>
+  <div><span>id: </span>{{event.id}}</div>
+  <div><span>opis: </span>{{event.description}}</div>
+  <div><span>adres: </span>{{event.address}}</div>
+  <div><span>longitude : </span>{{event.long}}</div>
+  <div><span>latitude: </span>{{event.lat}}</div>
+
 </div>
-<agm-map [latitude]="defaultLat" [longitude]="defaultLan">
+<agm-map [latitude]="defaultLat" [longitude]="defaultLan" (mapClick)="toggleDisplay()" >
   <agm-marker [latitude]="event.lat" [longitude]="event.long" *ngFor="let event of events" (markerClick)="toggleDisplay(event)"></agm-marker>
 </agm-map>
 
