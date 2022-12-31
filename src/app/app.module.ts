@@ -13,6 +13,10 @@ import { HeaderComponent } from './components/header/header.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AgmCoreModule} from '@agm/core';
 import { MapComponent } from './components/map/map.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './services/inMemoryData/in-memory-data.service';
+import { UserPanelComponent } from './components/user-panel/user-panel/user-panel.component';
 
 
 
@@ -24,6 +28,7 @@ import { MapComponent } from './components/map/map.component';
     LoginComponent,
     HeaderComponent,
     MapComponent,
+    UserPanelComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +36,10 @@ import { MapComponent } from './components/map/map.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     NgbModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    ),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyChg7CrYViIGlXMInPhAgZO1ZJm8j-4Vtc'
     })

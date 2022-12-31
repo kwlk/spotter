@@ -13,6 +13,7 @@
   <div><span>adres: </span>{{event.address}}</div>
   <div><span>longitude : </span>{{event.long}}</div>
   <div><span>latitude: </span>{{event.lat}}</div>
+  <div><span>date: </span>{{event.date}}</div>
 
 </div>
 <agm-map [latitude]="defaultLat" [longitude]="defaultLan" (mapClick)="toggleDisplay()" >

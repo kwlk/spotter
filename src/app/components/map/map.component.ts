@@ -27,7 +27,8 @@ export class MapComponent {
   }
 
   getEvents(): void {
-    this.events = this.eventService.getEvents();
+    this.eventService.getEvents()
+      .subscribe(events => this.events = events);
   }
 
 
