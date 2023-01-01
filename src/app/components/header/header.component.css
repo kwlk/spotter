@@ -1,3 +1,4 @@
+
 .background {
   height: 50px;
   width: 100%;
@@ -22,5 +23,6 @@
 
 .text {
   text-align: center;
+  display: inline;
   color: black;
 }

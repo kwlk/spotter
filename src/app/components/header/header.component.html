@@ -1,17 +1,29 @@
 
 
-<nav class="navbar sticky-top navbar-light bg-light">
+<nav class="navbar sticky-top navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li class="nav-item ">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
+        <li class="nav-item ">
+          <a class="nav-link active" aria-current="page" routerLink="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link active" aria-current="page" routerLink="/map">Map</a>
+        </li>
+        <li class="nav-item" *ngIf="afAuth.authState | async as user" >
+          <a class="nav-link text-nowrap active" aria-current="page" routerLink="/user-panel">User panel</a>
+        </li>
       </ul>
+      <div class="container">
+        <span class="navbar-nav justify-content-center"><h2>{{title}}</h2></span>
+      </div>
       <div class="profile-container d-flex flex-row-reverse" *ngIf="afAuth.authState | async as user">
         <div>
           <span class="p-2"> User: </span>
           <span class="p-2">{{user.displayName}}</span>
-          <span class="p-2"><button class="nav-link p-2" (click)="authService.signOut()">sign out</button></span>
+          <span class="p-2 "><button class="nav-link p-2 d-inline" (click)="authService.signOut()">sign out</button></span>
         </div>
       </div>
   </div>
