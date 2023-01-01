@@ -1,14 +1,46 @@
-<div>
-  <h2>User panel</h2>
-  <div><span>id: </span></div>
+<h2>User panel</h2>
+
+<ul>
+  <li *ngFor="let event of events">
+    <div>
+      <a (click)="getEvent(event)" >
+        <span class="badge">{{event.id}}</span>
+        {{event.title}}
+      </a>
+      <button type="button" class="delete" title="delete word"
+              >x</button>
+    </div>
+  </li>
+</ul>
+
+<div *ngIf="event; else other_content">
+  <div><span>id: </span>{{event.id}}</div>
   <div>
     <label for="event-title">Title: </label>
-    <input id="event-title"  placeholder="Title"/>
+    <input id="event-title" [(ngModel)]="event.title" placeholder="Title"/>
     <label for="event-address">Address: </label>
-    <input id="event-address"  placeholder="Address"/>
+    <input id="event-address" [(ngModel)]="event.address"  placeholder="Address"/>
     <label for="event-description">Description: </label>
-    <input id="event-description"  placeholder="Description"/>
+    <input id="event-description" [(ngModel)]="event.description" placeholder="Description"/>
   </div>
-  <button type="button" >go back</button>
-  <button type="button" >save</button>
+  <agm-map [latitude]="defaultLat" [longitude]="defaultLan" >
+    <agm-marker [latitude]="event.lat" [longitude]="event.long" ></agm-marker>
+  </agm-map>
+  <button type="button" (click)="cancel()" >cancel</button>
+  <button type="button" (click)="save()">save</button>
 </div>
+
+<ng-template #other_content>
+  <div>
+    <label for="newevent-title">Title: </label>
+    <input id="newevent-title" #eventTitle placeholder="Title"/>
+    <label for="newevent-address">Address: </label>
+    <input id="newevent-address" #eventAddress placeholder="Address"/>
+    <label for="newevent-description">Description: </label>
+    <input id="newevent-description" #eventDescription placeholder="Description"/>
+  </div>
+  <agm-map [latitude]="defaultLat" [longitude]="defaultLan"  (mapClick)="onChose">
+
+  </agm-map>
+  <button type="button" (click)="addEvent(eventTitle.value, eventAddress.value, eventDescription.value)" >add</button>
+</ng-template>

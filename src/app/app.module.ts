@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/inMemoryData/in-memory-data.service';
 import { UserPanelComponent } from './components/user-panel/user-panel/user-panel.component';
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -38,11 +39,12 @@ import { UserPanelComponent } from './components/user-panel/user-panel/user-pane
     NgbModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
+      InMemoryDataService, {dataEncapsulation: false}
     ),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyChg7CrYViIGlXMInPhAgZO1ZJm8j-4Vtc'
-    })
+    }),
+    FormsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

@@ -22,6 +22,22 @@ export class EventService {
     );
 
   }
+  updateEvent(event: CalendarEvent): Observable<any> {
+    return this.http.put(this.eventsUrl, event, this.httpOptions)
+      .pipe(
+      catchError(this.handleError<any>('updateHero'))
+    );
+  }
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  addEvent(event: CalendarEvent): Observable<CalendarEvent> {
+    return this.http.post<CalendarEvent>(this.eventsUrl, event, this.httpOptions).pipe(
+      catchError(this.handleError<CalendarEvent>('addEvent'))
+    );
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
