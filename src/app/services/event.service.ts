@@ -39,6 +39,14 @@ export class EventService {
     );
   }
 
+  deleteEvent(id: number): Observable<CalendarEvent> {
+    const url = `${this.eventsUrl}/${id}`;
+
+    return this.http.delete<CalendarEvent>(url, this.httpOptions).pipe(
+      catchError(this.handleError<CalendarEvent>('deleteHero'))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

@@ -11,13 +11,19 @@ import { Location } from '@angular/common';
 export class UserPanelComponent implements OnInit {
 
   readonly defaultLat = 50.04;
-  readonly defaultLan = 19.56;
+  readonly defaultLong = 19.56;
+  latitude;
+  longitude;
   events: CalendarEvent[] = [];
   event: CalendarEvent;
-  private location: Location;
+  //private location: Location;
   //event = { id: 14, title: 'Event3', long: 20.00398720620926, lat: 50.08384141523049, address: "ul. Nowa 1/4, 44-111 Kraków", description:"impreza"  };
 
   constructor(private eventService: EventService) { }
+
+  ngOnInit(): void {
+    this.getEvents();
+  }
 
   save(): void {
     if (this.event) {
@@ -35,12 +41,12 @@ export class UserPanelComponent implements OnInit {
     this.event = event;
   }
 
-  addEvent(title: string, address: string, description: string): void {
+  addEvent(title: string, address: string, description: string, lat: number, long: number): void {
     title = title.trim();
     address = address.trim();
     description = description.trim();
     if (!title || !address || !description) { return; }
-    this.eventService.addEvent({ title, address, description } as CalendarEvent)
+    this.eventService.addEvent({ title, address, description, lat, long } as CalendarEvent)
       .subscribe(event => {
         this.events.push(event);
       });
@@ -51,8 +57,12 @@ export class UserPanelComponent implements OnInit {
     this.getEvents();
   }
 
-  ngOnInit(): void {
-    this.getEvents();
+  onChoseLocation(event) {
+    this.latitude = event.coords.lat;
+    this.longitude = event.coords.lng;
   }
-
+  delete(event: CalendarEvent): void {
+    this.events = this.events.filter(h => h !== event);
+    this.eventService.deleteEvent(event.id).subscribe();
+  }
 }

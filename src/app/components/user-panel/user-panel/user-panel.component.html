@@ -7,8 +7,7 @@
         <span class="badge">{{event.id}}</span>
         {{event.title}}
       </a>
-      <button type="button" class="delete" title="delete word"
-              >x</button>
+      <button type="button" class="delete" title="delete event" (click)="delete(event)">x</button>
     </div>
   </li>
 </ul>
@@ -23,7 +22,7 @@
     <label for="event-description">Description: </label>
     <input id="event-description" [(ngModel)]="event.description" placeholder="Description"/>
   </div>
-  <agm-map [latitude]="defaultLat" [longitude]="defaultLan" >
+  <agm-map [latitude]="defaultLat" [longitude]="defaultLong" >
     <agm-marker [latitude]="event.lat" [longitude]="event.long" ></agm-marker>
   </agm-map>
   <button type="button" (click)="cancel()" >cancel</button>
@@ -39,8 +38,8 @@
     <label for="newevent-description">Description: </label>
     <input id="newevent-description" #eventDescription placeholder="Description"/>
   </div>
-  <agm-map [latitude]="defaultLat" [longitude]="defaultLan"  (mapClick)="onChose">
-
+  <agm-map [latitude]="defaultLat" [longitude]="defaultLong"  (mapClick)="onChoseLocation($event)">
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
   </agm-map>
-  <button type="button" (click)="addEvent(eventTitle.value, eventAddress.value, eventDescription.value)" >add</button>
+  <button type="button" (click)="addEvent(eventTitle.value, eventAddress.value, eventDescription.value, latitude, longitude)" >add</button>
 </ng-template>
