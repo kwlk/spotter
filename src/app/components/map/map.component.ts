@@ -16,6 +16,7 @@ export class MapComponent {
   event : CalendarEvent;
   readonly defaultLat = 50.04;
   readonly defaultLan = 19.56;
+  openedWindow : number = 0;
 
   constructor(private eventService: EventService) {}
 
@@ -24,6 +25,14 @@ export class MapComponent {
 
     this.event = event;
 
+  }
+
+  openWindow(id) {
+    this.openedWindow = id;
+  }
+
+  isInfoWindowOpen(id) {
+    return this.openedWindow == id;
   }
 
   getEvents(): void {
