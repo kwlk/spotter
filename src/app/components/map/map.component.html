@@ -3,7 +3,7 @@
 <ul class="list-group">
   <li *ngFor="let event of events">
       <span class="name">{{event.id}}  </span>
-      <span class="name">{{event.title}}</span>
+      <span class="name" (click)="toggleDisplay(event); openWindow(event.id)">{{event.title}}</span>
   </li>
 </ul>
 <div [hidden]="isDisplay" *ngIf="event">
@@ -17,6 +17,11 @@
 
 </div>
 <agm-map [latitude]="defaultLat" [longitude]="defaultLan" (mapClick)="toggleDisplay()" >
-  <agm-marker [latitude]="event.lat" [longitude]="event.long" *ngFor="let event of events" (markerClick)="toggleDisplay(event)"></agm-marker>
+  <agm-marker [latitude]="event.lat" [longitude]="event.long"
+              *ngFor="let event of events" (markerClick)="toggleDisplay(event); openWindow(event.id)">
+    <agm-info-window [isOpen]="isInfoWindowOpen(event.id)">
+      <strong> {{event.title}}</strong>
+    </agm-info-window>
+  </agm-marker>
 </agm-map>
 
