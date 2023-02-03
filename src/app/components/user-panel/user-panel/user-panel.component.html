@@ -12,21 +12,21 @@
   </li>
 </ul>
 
-<div *ngIf="event; else other_content">
-  <div><span>id: </span>{{event.id}}</div>
+<div *ngIf="calendarEvent; else other_content">
+  <div><span>id: </span>{{calendarEvent.id}}</div>
   <div>
     <label for="event-title">Title: </label>
-    <input id="event-title" [(ngModel)]="event.title" placeholder="Title"/>
+    <input id="event-title" [(ngModel)]="calendarEvent.title" placeholder="Title"/>
     <label for="event-address">Address: </label>
-    <input id="event-address" [(ngModel)]="event.address"  placeholder="Address"/>
+    <input id="event-address" [(ngModel)]="calendarEvent.address"  placeholder="Address"/>
     <label for="event-description">Description: </label>
-    <input id="event-description" [(ngModel)]="event.description" placeholder="Description"/>
+    <input id="event-description" [(ngModel)]="calendarEvent.description" placeholder="Description"/>
   </div>
   <agm-map [latitude]="defaultLat" [longitude]="defaultLong" >
-    <agm-marker [latitude]="event.lat" [longitude]="event.long" ></agm-marker>
+    <agm-marker [latitude]="calendarEvent.latitude" [longitude]="calendarEvent.longitude" ></agm-marker>
   </agm-map>
   <button type="button" (click)="cancel()" >cancel</button>
-  <button type="button" (click)="save()">save</button>
+  <button type="button" (click)="save(calendarEvent)">save</button>
 </div>
 
 <ng-template #other_content>

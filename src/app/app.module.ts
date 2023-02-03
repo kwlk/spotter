@@ -7,19 +7,18 @@ import {CalendarEventsComponent} from './components/calendar-events/calendar-eve
 import {LoginComponent} from './components/login/login.component';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {AngularFireDatabaseModule} from '@angular/fire/compat/database';
 import {environment} from "../environments/environment";
-import {AuthService} from "./services/auth.service";
-import { HeaderComponent } from './components/header/header.component';
+import {AuthService} from "./services/auth/auth.service";
+import {HeaderComponent} from './components/header/header.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AgmCoreModule} from '@agm/core';
-import { MapComponent } from './components/map/map.component';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './services/inMemoryData/in-memory-data.service';
-import { UserPanelComponent } from './components/user-panel/user-panel/user-panel.component';
+import {MapComponent} from './components/map/map.component';
+import {HttpClientModule} from '@angular/common/http';
+import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
+import {InMemoryDataService} from './services/inMemoryData/in-memory-data.service';
+import {UserPanelComponent} from './components/user-panel/user-panel/user-panel.component';
 import {FormsModule} from "@angular/forms";
-
-
 
 
 @NgModule({
@@ -36,6 +35,7 @@ import {FormsModule} from "@angular/forms";
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     NgbModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(

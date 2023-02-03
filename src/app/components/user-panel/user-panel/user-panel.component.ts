@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { EventService } from '../../../services/event.service'
-import {CalendarEvent} from '../../../interfaces/CalendarEvent'
-import { Location } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {EventService} from '../../../services/event/event.service'
+import {CalendarEvent} from "../../../models/event/calendar-event.model";
+import {getAuth} from "@angular/fire/auth";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-user-panel',
@@ -15,45 +16,67 @@ export class UserPanelComponent implements OnInit {
   latitude;
   longitude;
   events: CalendarEvent[] = [];
-  event: CalendarEvent;
-  //private location: Location;
-  //event = { id: 14, title: 'Event3', long: 20.00398720620926, lat: 50.08384141523049, address: "ul. Nowa 1/4, 44-111 Kraków", description:"impreza"  };
+  calendarEvent: CalendarEvent;
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService) {
+  }
 
   ngOnInit(): void {
     this.getEvents();
   }
 
-  save(): void {
-    if (this.event) {
-      this.eventService.updateEvent(this.event)
-        .subscribe(event => this.event = event);
+  save(event: CalendarEvent): void {
+    if (this.calendarEvent) {
+      //add data update
+      this.eventService.update(this.calendarEvent.id, event).then(() =>
+      console.log("Updated correctly"));
     }
   }
 
   getEvents(): void {
-    this.eventService.getEvents()
-      .subscribe(events => this.events = events);
+    this.eventService.getAll().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.key, ...c.payload.val() })
+        )
+      )
+    ).subscribe(data => {
+      this.events = data;
+    });
   }
 
   getEvent(event): void {
-    this.event = event;
+    this.calendarEvent = event;
   }
 
   addEvent(title: string, address: string, description: string, lat: number, long: number): void {
+    this.newCalendarEvent();
     title = title.trim();
     address = address.trim();
     description = description.trim();
-    if (!title || !address || !description) { return; }
-    this.eventService.addEvent({ title, address, description, lat, long } as CalendarEvent)
-      .subscribe(event => {
-        this.events.push(event);
-      });
+    if (!title || !address || !description) {
+      return;
+    }
+    this.calendarEvent.title = title;
+    this.calendarEvent.description = description;
+    this.calendarEvent.address = address;
+    this.calendarEvent.latitude = lat;
+    this.calendarEvent.longitude = long;
+    this.calendarEvent.userId = getAuth().currentUser.uid;
+    this.calendarEvent.date = Date.now();
+    console.log(this.calendarEvent);
+
+    this.eventService.create(this.calendarEvent).then(() => {
+      console.log('Created new item successfully!');
+    })
+  }
+
+  newCalendarEvent() {
+    this.calendarEvent = new CalendarEvent();
   }
 
   cancel(): void {
-    this.event = null;
+    this.calendarEvent = null;
     this.getEvents();
   }
 
@@ -61,8 +84,9 @@ export class UserPanelComponent implements OnInit {
     this.latitude = event.coords.lat;
     this.longitude = event.coords.lng;
   }
+
   delete(event: CalendarEvent): void {
     this.events = this.events.filter(h => h !== event);
-    this.eventService.deleteEvent(event.id).subscribe();
+    this.eventService.delete(event.id);
   }
 }
