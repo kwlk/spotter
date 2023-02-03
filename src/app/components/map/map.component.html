@@ -11,13 +11,13 @@
   <div><span>id: </span>{{event.id}}</div>
   <div><span>opis: </span>{{event.description}}</div>
   <div><span>adres: </span>{{event.address}}</div>
-  <div><span>longitude : </span>{{event.long}}</div>
-  <div><span>latitude: </span>{{event.lat}}</div>
+  <div><span>longitude : </span>{{event.longitude}}</div>
+  <div><span>latitude: </span>{{event.latitude}}</div>
   <div><span>date: </span>{{event.date}}</div>
 
 </div>
 <agm-map [latitude]="defaultLat" [longitude]="defaultLan" (mapClick)="toggleDisplay()" >
-  <agm-marker [latitude]="event.lat" [longitude]="event.long"
+  <agm-marker [latitude]="event.latitude" [longitude]="event.longitude"
               *ngFor="let event of events" (markerClick)="toggleDisplay(event); openWindow(event.id)">
     <agm-info-window [isOpen]="isInfoWindowOpen(event.id)">
       <strong> {{event.title}}</strong>

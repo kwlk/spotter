@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {EVENTS} from "../../mock-events";
-import {EventService} from '../../services/event.service'
-import {CalendarEvent} from "../../interfaces/CalendarEvent";
+import { Component} from '@angular/core';
+import {EventService} from '../../services/event/event.service'
+import {CalendarEvent} from "../../models/event/calendar-event.model";
+import {map} from "rxjs/operators";
 
 
 @Component({
@@ -36,8 +36,15 @@ export class MapComponent {
   }
 
   getEvents(): void {
-    this.eventService.getEvents()
-      .subscribe(events => this.events = events);
+    this.eventService.getAll().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ key: c.payload.key, ...c.payload.val() })
+        )
+      )
+    ).subscribe(data => {
+      this.events = data;
+    });
   }
 
 
