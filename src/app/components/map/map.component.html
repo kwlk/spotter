@@ -1,27 +1,49 @@
-<p>Map with events:</p>
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Map of Events</h1>
+      </div>
+    </div>
+  </section>
 
-<ul class="list-group">
-  <li *ngFor="let event of events">
-      <span class="name">{{event.id}}  </span>
-      <span class="name" (click)="toggleDisplay(event); openWindow(event.id)">{{event.title}}</span>
-  </li>
-</ul>
-<div [hidden]="isDisplay" *ngIf="event">
-  <h2>{{event.title | uppercase}} Details</h2>
-  <div><span>id: </span>{{event.id}}</div>
-  <div><span>opis: </span>{{event.description}}</div>
-  <div><span>adres: </span>{{event.address}}</div>
-  <div><span>longitude : </span>{{event.longitude}}</div>
-  <div><span>latitude: </span>{{event.latitude}}</div>
-  <div><span>date: </span>{{event.date}}</div>
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="events-list row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <app-event (onData)="handleData($event)" *ngFor="let event of events" [event]="event"></app-event>
+    </div>
+      <div class="event-details" [hidden]="isDisplay" *ngIf="event">
 
+        <table class="table table-bordered centered" >
+          <tr>
+            <th class="thead-dark" width="20%">Description</th>
+            <td idth="30%">{{ event.description }}</td>
+          </tr>
+          <tr>
+            <th class="thead-dark">Address</th>
+            <td>{{ event.address }}</td>
+          </tr>
+          <tr>
+            <th class="thead-dark">City</th>
+            <td>{{ city }}</td>
+          </tr>
+          <tr>
+            <th class="thead-dark">Date</th>
+            <td>{{ event.date }}</td>
+          </tr>
+        </table>    
+      </div>
+      <agm-map class="map" [latitude]="defaultLat" [longitude]="defaultLan" (mapClick)="toggleDisplay()" >
+        <agm-marker [latitude]="event.latitude" [longitude]="event.longitude"
+                    *ngFor="let event of events" (markerClick)="handleData(event)">
+          <agm-info-window [isOpen]="isInfoWindowOpen(event.id)">
+            <strong> {{event.title}}</strong>
+          </agm-info-window>
+        </agm-marker>
+      </agm-map>
+  </div>
 </div>
-<agm-map [latitude]="defaultLat" [longitude]="defaultLan" (mapClick)="toggleDisplay()" >
-  <agm-marker [latitude]="event.latitude" [longitude]="event.longitude"
-              *ngFor="let event of events" (markerClick)="toggleDisplay(event); openWindow(event.id)">
-    <agm-info-window [isOpen]="isInfoWindowOpen(event.id)">
-      <strong> {{event.title}}</strong>
-    </agm-info-window>
-  </agm-marker>
-</agm-map>
+</main>
+
+
 
