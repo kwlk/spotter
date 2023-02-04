@@ -1,7 +1,7 @@
 <h2>User panel</h2>
 
-<ul>
-  <li *ngFor="let event of events">
+<ul *ngFor="let event of events">
+  <li *ngIf="event.userId == currentUser">
     <div>
       <a (click)="getEvent(event)" >
         <span class="badge">{{event.id}}</span>
@@ -24,7 +24,7 @@
     <label for="event-date">Date: </label>
     <input type= 'date' id="event-date" [(ngModel)]="calendarEvent.date"  placeholder="Date"/>
   </div>
-  <agm-map [latitude]="defaultLat" [longitude]="defaultLong" >
+  <agm-map [latitude]="defaultLat" [longitude]="defaultLong" (mapClick)="onChoseLocation($event)">
     <agm-marker [latitude]="calendarEvent.latitude" [longitude]="calendarEvent.longitude" ></agm-marker>
   </agm-map>
   <button type="button" (click)="cancel()" >cancel</button>
