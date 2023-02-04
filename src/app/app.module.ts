@@ -19,6 +19,7 @@ import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './services/inMemoryData/in-memory-data.service';
 import {UserPanelComponent} from './components/user-panel/user-panel/user-panel.component';
 import {FormsModule} from "@angular/forms";
+import { CalendarEventComponent } from './components/calendar-event/calendar-event.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {FormsModule} from "@angular/forms";
     HeaderComponent,
     MapComponent,
     UserPanelComponent,
+    CalendarEventComponent,
   ],
   imports: [
     BrowserModule,

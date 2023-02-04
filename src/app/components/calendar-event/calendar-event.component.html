@@ -1,0 +1,23 @@
+<div *ngIf="currentCalendarEvent" class="edit-form">
+  <h4>Tutorial</h4>
+  <form>
+    <div class="form-group">
+      <label >Title</label>
+      {{currentCalendarEvent.title}}
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      {{currentCalendarEvent.description}}
+    </div>
+  </form>
+
+  <button type="submit" class="badge badge-success" routerLink="/map">
+    See on map
+  </button>
+  <p>{{ message }}</p>
+</div>
+
+<div *ngIf="!currentCalendarEvent">
+  <br />
+  <p>Cannot access this Tutorial...</p>
+</div>
