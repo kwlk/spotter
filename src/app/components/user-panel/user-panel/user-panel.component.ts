@@ -16,7 +16,9 @@ export class UserPanelComponent implements OnInit {
   latitude;
   longitude;
   events: CalendarEvent[] = [];
+  userEvents: CalendarEvent[] = [];
   calendarEvent: CalendarEvent;
+  currentUser = getAuth().currentUser.uid;
 
   constructor(private eventService: EventService) {
   }
@@ -45,16 +47,29 @@ export class UserPanelComponent implements OnInit {
     });
   }
 
+  getUserEvents(): void {
+    this.eventService.getAll().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.key, ...c.payload.val() })
+        )
+      )
+    ).subscribe(data => {
+      this.userEvents = data;
+    });
+  }
+
+
   getEvent(event): void {
     this.calendarEvent = event;
   }
 
-  addEvent(title: string, address: string, description: string, lat: number, long: number): void {
+  addEvent(title: string, address: string, description: string, lat: number, long: number, date: string): void {
     this.newCalendarEvent();
     title = title.trim();
     address = address.trim();
     description = description.trim();
-    if (!title || !address || !description) {
+    if (!title || !address || !description || !date) {
       return;
     }
     this.calendarEvent.title = title;
@@ -63,12 +78,13 @@ export class UserPanelComponent implements OnInit {
     this.calendarEvent.latitude = lat;
     this.calendarEvent.longitude = long;
     this.calendarEvent.userId = getAuth().currentUser.uid;
-    this.calendarEvent.date = Date.now();
+    this.calendarEvent.date = date;
     console.log(this.calendarEvent);
 
     this.eventService.create(this.calendarEvent).then(() => {
       console.log('Created new item successfully!');
     })
+    this.calendarEvent = null;
   }
 
   newCalendarEvent() {

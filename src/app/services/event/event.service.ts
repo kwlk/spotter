@@ -20,6 +20,11 @@ export class EventService {
     return this.eventsRef;
   }
 
+  getUsersAll(id): AngularFireList<CalendarEvent> {
+    this.eventsRef.
+    return ;
+  }
+
   create(calendarEvent: CalendarEvent): any {
     return this.eventsRef.push(calendarEvent);
   }
