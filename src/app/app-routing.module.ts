@@ -7,11 +7,12 @@ import {MapComponent} from "./components/map/map.component";
 import {UserPanelComponent} from "./components/user-panel/user-panel/user-panel.component"
 
 const routes: Routes = [
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'map', component: MapComponent},
+  {path: '', redirectTo: '/events', pathMatch: 'full'},
+  {path: 'map', component: MapComponent, canActivate: [AuthGuard]},
   {path: 'events', component: CalendarEventsComponent, canActivate: [AuthGuard]},
-  {path: 'user-panel', component: UserPanelComponent, canActivate: [AuthGuard]}
+  {path: 'user-panel', component: UserPanelComponent, canActivate: [AuthGuard]},
+  {path: 'dashboard', redirectTo: 'events'}
 ];
 
 @NgModule({

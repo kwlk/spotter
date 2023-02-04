@@ -17,11 +17,11 @@ export class CalendarEventsComponent implements OnInit {
   currentIndex = -1;
   title = '';
 
-  constructor(public authService: AuthService, public afAuth: AngularFireAuth, private eventService: EventService) { }
+  constructor(public authService: AuthService, public afAuth: AngularFireAuth, private eventService: EventService) { };
 
   ngOnInit(): void {
     this.retrieveEvents();
-  }
+  };
 
   refreshList(): void {
     this.currentCalendarEvent = undefined;
