@@ -16,7 +16,6 @@ export class UserPanelComponent implements OnInit {
   latitude;
   longitude;
   events: CalendarEvent[] = [];
-  userEvents: CalendarEvent[] = [];
   calendarEvent: CalendarEvent;
   currentUser = getAuth().currentUser.uid;
 
@@ -47,17 +46,6 @@ export class UserPanelComponent implements OnInit {
     });
   }
 
-  getUserEvents(): void {
-    this.eventService.getAll().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.key, ...c.payload.val() })
-        )
-      )
-    ).subscribe(data => {
-      this.userEvents = data;
-    });
-  }
 
 
   getEvent(event): void {
