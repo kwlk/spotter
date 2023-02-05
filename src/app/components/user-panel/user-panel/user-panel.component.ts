@@ -18,6 +18,7 @@ export class UserPanelComponent implements OnInit {
   events: CalendarEvent[] = [];
   city: string;
   calendarEvent: CalendarEvent;
+  isSelectedEvent: boolean;
   currentUser = getAuth().currentUser.uid;
 
   constructor(private eventService: EventService) {
@@ -26,6 +27,7 @@ export class UserPanelComponent implements OnInit {
   ngOnInit(): void {
     this.getEvents();
     this.newCalendarEvent();
+    this.isSelectedEvent = false;
   }
 
   save(event: CalendarEvent): void {
@@ -34,7 +36,7 @@ export class UserPanelComponent implements OnInit {
       this.eventService.update(this.calendarEvent.id, event).then(() =>
       console.log("Updated correctly"));
     }
-    this.calendarEvent = null;
+    this.newCalendarEvent();
     this.longitude = null;
     this.latitude = null;
   }
@@ -54,6 +56,7 @@ export class UserPanelComponent implements OnInit {
 
   getEvent(event): void {
     this.calendarEvent = event;
+    this.isSelectedEvent = true;
     // event.latitude = this.latitude;
     // event.longitude = this.longitude;
   }
@@ -66,7 +69,6 @@ export class UserPanelComponent implements OnInit {
     if (!title || !address || !description || !date) {
       return;
     }
-    this.calendarEvent.id = "testid";
     this.calendarEvent.title = title;
     this.calendarEvent.description = description;
     this.calendarEvent.address = address;
@@ -79,19 +81,20 @@ export class UserPanelComponent implements OnInit {
     this.eventService.create(this.calendarEvent).then(() => {
       console.log('Created new item successfully!');
     })
-    this.calendarEvent = null;
+    this.newCalendarEvent();
     this.longitude = null;
     this.latitude = null;
   }
 
   newCalendarEvent() {
     this.calendarEvent = new CalendarEvent();
+    this.isSelectedEvent = false;
   }
 
   cancel(): void {
-    this.calendarEvent = null;
     this.longitude = null;
     this.latitude = null;
+    this.newCalendarEvent();
     this.getEvents();
   }
 
@@ -113,14 +116,6 @@ export class UserPanelComponent implements OnInit {
   delete(event: CalendarEvent): void {
     this.events = this.events.filter(h => h !== event);
     this.eventService.delete(event.id);
-  }
-
-  show(): void {
-    console.log("id:"+ this.calendarEvent.id);
-    console.log("title:"+ this.calendarEvent.title);
-    console.log("description:"+ this.calendarEvent.description);
-    console.log("address:"+ this.calendarEvent.address);
-    console.log("lat:"+ this.calendarEvent.latitude);
-    console.log("long:"+ this.calendarEvent.longitude);
+    this.newCalendarEvent();
   }
 }
