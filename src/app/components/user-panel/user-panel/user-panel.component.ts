@@ -99,8 +99,10 @@ export class UserPanelComponent implements OnInit {
   }
 
   onChoseLocation(event) {
+    console.log("new coordinates")
     this.latitude = event.coords.lat;
     this.longitude = event.coords.lng;
+    this.saveNewLocation();
   }
 
   saveNewLocation() {
