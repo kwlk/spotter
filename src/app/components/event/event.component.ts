@@ -12,7 +12,7 @@ export class EventComponent implements OnInit {
   @Output() onData = new EventEmitter<any>();
   title: string;
   description: string;
-  date: number;
+  date: string;
 
   constructor() { }
 
