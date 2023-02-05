@@ -17,6 +17,7 @@ export class UserPanelComponent implements OnInit {
   longitude;
   events: CalendarEvent[] = [];
   calendarEvent: CalendarEvent;
+  currentUser = getAuth().currentUser.uid;
 
   constructor(private eventService: EventService) {
   }
@@ -31,6 +32,9 @@ export class UserPanelComponent implements OnInit {
       this.eventService.update(this.calendarEvent.id, event).then(() =>
       console.log("Updated correctly"));
     }
+    this.calendarEvent = null;
+    this.longitude = null;
+    this.latitude = null;
   }
 
   getEvents(): void {
@@ -45,16 +49,19 @@ export class UserPanelComponent implements OnInit {
     });
   }
 
+
   getEvent(event): void {
     this.calendarEvent = event;
+    // event.latitude = this.latitude;
+    // event.longitude = this.longitude;
   }
 
-  addEvent(title: string, address: string, description: string, lat: number, long: number): void {
+  addEvent(title: string, address: string, description: string, lat: number, long: number, date: string): void {
     this.newCalendarEvent();
     title = title.trim();
     address = address.trim();
     description = description.trim();
-    if (!title || !address || !description) {
+    if (!title || !address || !description || !date) {
       return;
     }
     this.calendarEvent.title = title;
@@ -63,12 +70,15 @@ export class UserPanelComponent implements OnInit {
     this.calendarEvent.latitude = lat;
     this.calendarEvent.longitude = long;
     this.calendarEvent.userId = getAuth().currentUser.uid;
-    this.calendarEvent.date = Date.now();
+    this.calendarEvent.date = date;
     console.log(this.calendarEvent);
 
     this.eventService.create(this.calendarEvent).then(() => {
       console.log('Created new item successfully!');
     })
+    this.calendarEvent = null;
+    this.longitude = null;
+    this.latitude = null;
   }
 
   newCalendarEvent() {
@@ -77,12 +87,24 @@ export class UserPanelComponent implements OnInit {
 
   cancel(): void {
     this.calendarEvent = null;
+    this.longitude = null;
+    this.latitude = null;
     this.getEvents();
   }
 
   onChoseLocation(event) {
     this.latitude = event.coords.lat;
     this.longitude = event.coords.lng;
+  }
+
+  saveNewLocation() {
+    this.calendarEvent.latitude = this.latitude;
+    this.calendarEvent.longitude = this.longitude;
+  }
+
+  getCurrentLocation(event) {
+    this.latitude = this.calendarEvent.latitude;
+    this.longitude = this.calendarEvent.longitude;
   }
 
   delete(event: CalendarEvent): void {

@@ -1,9 +1,9 @@
 <h2>User panel</h2>
 
-<ul>
-  <li *ngFor="let event of events">
+<ul *ngFor="let event of events">
+  <li *ngIf="event.userId == currentUser">
     <div>
-      <a (click)="getEvent(event)" >
+      <a (click)="getEvent(event); getCurrentLocation(event)" >
         <span class="badge">{{event.id}}</span>
         {{event.title}}
       </a>
@@ -14,6 +14,7 @@
 
 <div *ngIf="calendarEvent; else other_content">
   <div><span>id: </span>{{calendarEvent.id}}</div>
+  <div><span>uid: </span>{{calendarEvent.userId}}</div>
   <div>
     <label for="event-title">Title: </label>
     <input id="event-title" [(ngModel)]="calendarEvent.title" placeholder="Title"/>
@@ -21,12 +22,14 @@
     <input id="event-address" [(ngModel)]="calendarEvent.address"  placeholder="Address"/>
     <label for="event-description">Description: </label>
     <input id="event-description" [(ngModel)]="calendarEvent.description" placeholder="Description"/>
+    <label for="event-date">Date: </label>
+    <input type= 'date' id="event-date" [(ngModel)]="calendarEvent.date"  placeholder="Date"/>
   </div>
-  <agm-map [latitude]="defaultLat" [longitude]="defaultLong" >
-    <agm-marker [latitude]="calendarEvent.latitude" [longitude]="calendarEvent.longitude" ></agm-marker>
+  <agm-map [latitude]="defaultLat" [longitude]="defaultLong" (mapClick)="onChoseLocation($event)">
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
   </agm-map>
   <button type="button" (click)="cancel()" >cancel</button>
-  <button type="button" (click)="save(calendarEvent)">save</button>
+  <button type="button" (click)="saveNewLocation(); save(calendarEvent)">save</button>
 </div>
 
 <ng-template #other_content>
@@ -37,9 +40,12 @@
     <input id="newevent-address" #eventAddress placeholder="Address"/>
     <label for="newevent-description">Description: </label>
     <input id="newevent-description" #eventDescription placeholder="Description"/>
+    <label for="newevent-date">Date: </label>
+    <input type= 'date' id="newevent-date"  #eventDate  placeholder="Date"/>
   </div>
   <agm-map [latitude]="defaultLat" [longitude]="defaultLong"  (mapClick)="onChoseLocation($event)">
     <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
   </agm-map>
-  <button type="button" (click)="addEvent(eventTitle.value, eventAddress.value, eventDescription.value, latitude, longitude)" >add</button>
+  <button type="button" (click)="addEvent(eventTitle.value, eventAddress.value, eventDescription.value, latitude, longitude, eventDate.value);
+                          eventTitle.value=''; eventDescription.value=''; eventAddress.value=''; eventDate.value=''; latitude=''; longitude=''" >add</button>
 </ng-template>

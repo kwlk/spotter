@@ -20,6 +20,7 @@ export class EventService {
     return this.eventsRef;
   }
 
+
   create(calendarEvent: CalendarEvent): any {
     return this.eventsRef.push(calendarEvent);
   }
