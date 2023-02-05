@@ -59,11 +59,13 @@
         </tr>
         </tbody>
       </table>
+      <div *ngIf="isSelectedEvent; else MapDefault">
         <agm-map [latitude]="defaultLat" [longitude]="defaultLong"  (mapClick)="onChoseLocation($event)">
-          <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+          <agm-marker [latitude]="calendarEvent.latitude" [longitude]="calendarEvent.longitude"></agm-marker>
         </agm-map>
+      </div>
+    </div>
   </div>
-</div>
 </main>
 
 <ng-template #Add>
@@ -71,4 +73,10 @@
     <button type="button" class="btn btn-secondary" style="margin: 10px; height: 4em;" (click)="addEvent(calendarEvent.title, calendarEvent.address, calendarEvent.description, latitude, longitude, calendarEvent.date)">Add</button>
     <button type="button" (click)="cancel()" class="btn btn-secondary" style="margin: 10px; height: 4em;">Cancel</button>
   </div>
+</ng-template>
+
+<ng-template #MapDefault>
+  <agm-map [latitude]="defaultLat" [longitude]="defaultLong"  (mapClick)="onChoseLocation($event)">
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  </agm-map>
 </ng-template>
