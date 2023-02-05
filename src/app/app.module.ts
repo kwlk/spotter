@@ -46,7 +46,7 @@ import { EventComponent } from './components/event/event.component';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyChg7CrYViIGlXMInPhAgZO1ZJm8j-4Vtc'
     }),
-    FormsModule
+    FormsModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

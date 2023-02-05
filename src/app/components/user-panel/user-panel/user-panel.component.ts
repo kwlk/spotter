@@ -16,6 +16,7 @@ export class UserPanelComponent implements OnInit {
   latitude;
   longitude;
   events: CalendarEvent[] = [];
+  city: string;
   calendarEvent: CalendarEvent;
 
   constructor(private eventService: EventService) {
@@ -23,6 +24,7 @@ export class UserPanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEvents();
+    this.newCalendarEvent();
   }
 
   save(event: CalendarEvent): void {
@@ -57,6 +59,7 @@ export class UserPanelComponent implements OnInit {
     if (!title || !address || !description) {
       return;
     }
+    this.calendarEvent.id = "testid";
     this.calendarEvent.title = title;
     this.calendarEvent.description = description;
     this.calendarEvent.address = address;
@@ -88,5 +91,14 @@ export class UserPanelComponent implements OnInit {
   delete(event: CalendarEvent): void {
     this.events = this.events.filter(h => h !== event);
     this.eventService.delete(event.id);
+  }
+
+  show(): void {
+    console.log("id:"+ this.calendarEvent.id);
+    console.log("title:"+ this.calendarEvent.title);
+    console.log("description:"+ this.calendarEvent.description);
+    console.log("address:"+ this.calendarEvent.address);
+    console.log("lat:"+ this.calendarEvent.latitude);
+    console.log("long:"+ this.calendarEvent.longitude);
   }
 }

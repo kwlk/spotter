@@ -1,4 +1,4 @@
-<nav class="navbar sticky-top navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar sticky-top navbar navbar-expand-lg navbar-light bg-light background">
   <div class="container-fluid">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item ">
@@ -11,9 +11,7 @@
           <a class="nav-link text-nowrap active" aria-current="page" routerLink="/user-panel">User panel</a>
         </li>
       </ul>
-      <div class="container">
-        <span class="navbar-nav justify-content-center" style="position: absolute; left: 50%; right: 50%; top: 10%"><h2>{{title}}</h2></span>
-      </div>
+      <img src="assets/spotter_logo.svg" alt="logo" class="navbar-nav justify-content-center" svgIcon="spotter_logo" style="display: inline-block;">
       <div class="profile-container d-flex flex-row-reverse" *ngIf="afAuth.authState | async as user">
         <div>
           <span class="p-2"> User: </span>
