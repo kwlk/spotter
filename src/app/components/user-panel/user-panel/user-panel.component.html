@@ -7,21 +7,27 @@
     </div>
   </section>
     <h2 class="fw-light" style="display: flex; justify-content: center;margin-bottom: 1em;">Add or Edit</h2>
-  <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
+  <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 2em;">
     <div>
-      <label for="event-title">ID: </label>
-      <input id="event-title" [(ngModel)]="calendarEvent.id" placeholder="Title"/>
-      <label for="event-title">Title: </label>
-      <input id="event-title" [(ngModel)]="calendarEvent.title" placeholder="Title"/>
-      <label for="event-address">Address: </label>
-      <input id="event-address" [(ngModel)]="calendarEvent.address"  placeholder="Address"/>
-      <label for="event-description">Description: </label>
-      <input id="event-description" [(ngModel)]="calendarEvent.description" placeholder="Description"/>
+      <div style="display: flex; flex-direction: row;">
+        <div style="margin: 0.5em;">
+          <label for="event-title">Title: </label>
+          <input id="event-title" [(ngModel)]="calendarEvent.title" placeholder="Title" class="form-control"/>
+        </div>
+        <div style="margin: 0.5em;">
+          <label for="event-address">Address: </label>
+          <input id="event-address" [(ngModel)]="calendarEvent.address"  placeholder="Address" class="form-control"/>
+        </div>
+      </div>
+      <div>
+        <label for="event-description">Description: </label>
+        <textarea id="event-description" class="form-control" rows="2" style="height: 100px;" [(ngModel)]="calendarEvent.description"></textarea>
+      </div>
+
     </div>
-    <div>
-    <button type="button" (click)="cancel()" >cancel</button>
-    <button type="button" (click)="show()" >show</button>
-    <button type="button" (click)="addEvent(calendarEvent.title, calendarEvent.address, calendarEvent.description, latitude, longitude)">save</button>
+    <div style="display:flex; justify-content: center; margin-left: 1em;align-items: center;">
+    <button type="button" class="btn btn-secondary" style="margin: 10px; height: 4em;" (click)="addEvent(calendarEvent.title, calendarEvent.address, calendarEvent.description, latitude, longitude)">Save</button>
+      <button type="button" (click)="cancel()" class="btn btn-secondary" style="margin: 10px; height: 4em;">Cancel</button>
     </div>
   </div>
 
@@ -41,10 +47,10 @@
               <td>{{ event.description }}</td>
               <td>{{ event.address }}</td>
               <td>{{ event.date }}</td>
-              <td><button class="btn btn-danger" (click)="delete(event)">Delete</button></td>
+              <td style="display: flex; justify-content: center"><button class="btn btn-danger" (click)="delete(event)">Delete</button></td>
             </tr>
           </tbody>
-        </table>   
+        </table>
         <agm-map [latitude]="defaultLat" [longitude]="defaultLong"  (mapClick)="onChoseLocation($event)">
           <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
         </agm-map>
