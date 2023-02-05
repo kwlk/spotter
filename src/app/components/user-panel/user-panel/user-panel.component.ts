@@ -102,7 +102,7 @@ export class UserPanelComponent implements OnInit {
     console.log("new coordinates")
     this.latitude = event.coords.lat;
     this.longitude = event.coords.lng;
-    this.saveNewLocation();
+   // this.saveNewLocation();
   }
 
   saveNewLocation() {
@@ -110,7 +110,7 @@ export class UserPanelComponent implements OnInit {
     this.calendarEvent.longitude = this.longitude;
   }
 
-  getCurrentLocation(event) {
+  getCurrentLocation() {
     this.latitude = this.calendarEvent.latitude;
     this.longitude = this.calendarEvent.longitude;
   }
