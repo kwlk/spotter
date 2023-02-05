@@ -1,4 +1,7 @@
 agm-map {
-  height: 300px;
-  width: 800px;
+  height: 40em;
+}
+
+input{
+  margin: 10px;
 }

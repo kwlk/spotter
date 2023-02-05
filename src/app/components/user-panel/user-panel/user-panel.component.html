@@ -1,51 +1,73 @@
-<h2>User panel</h2>
-
-<ul *ngFor="let event of events">
-  <li *ngIf="event.userId == currentUser">
-    <div>
-      <a (click)="getEvent(event); getCurrentLocation(event)" >
-        <span class="badge">{{event.id}}</span>
-        {{event.title}}
-      </a>
-      <button type="button" class="delete" title="delete event" (click)="delete(event)">x</button>
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">User Panel</h1>
+      </div>
     </div>
-  </li>
-</ul>
+  </section>
+    <h2 class="fw-light" style="display: flex; justify-content: center;margin-bottom: 1em;">Add or Edit</h2>
+  <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 2em;">
+    <div>
+      <div style="display: flex; flex-direction: row;">
+        <div style="margin: 0.5em;">
+          <label for="event-title">Title: </label>
+          <input id="event-title" [(ngModel)]="calendarEvent.title" placeholder="Title" class="form-control"/>
+        </div>
+        <div style="margin: 0.5em;">
+          <label for="event-address">Address: </label>
+          <input id="event-address" [(ngModel)]="calendarEvent.address"  placeholder="Address" class="form-control"/>
+        </div>
+        <div style="margin: 0.5em;">
+          <label for="event-date">Date: </label>
+          <input type='date' id="event-date" [(ngModel)]="calendarEvent.date"  placeholder="Date" class="form-control"/>
+        </div>
+      </div>
+      <div>
+        <label for="event-description">Description: </label>
+        <textarea id="event-description" class="form-control" rows="2" style="height: 100px;" [(ngModel)]="calendarEvent.description"></textarea>
+      </div>
 
-<div *ngIf="calendarEvent; else other_content">
-  <div><span>id: </span>{{calendarEvent.id}}</div>
-  <div><span>uid: </span>{{calendarEvent.userId}}</div>
-  <div>
-    <label for="event-title">Title: </label>
-    <input id="event-title" [(ngModel)]="calendarEvent.title" placeholder="Title"/>
-    <label for="event-address">Address: </label>
-    <input id="event-address" [(ngModel)]="calendarEvent.address"  placeholder="Address"/>
-    <label for="event-description">Description: </label>
-    <input id="event-description" [(ngModel)]="calendarEvent.description" placeholder="Description"/>
-    <label for="event-date">Date: </label>
-    <input type= 'date' id="event-date" [(ngModel)]="calendarEvent.date"  placeholder="Date"/>
+    </div>
+    <div *ngIf="isSelectedEvent; else Add">
+      <div style="display:flex; justify-content: center; margin-left: 1em;align-items: center;">
+        <button type="button" class="btn btn-secondary" style="margin: 10px; height: 4em;" (click)="saveNewLocation(); save(calendarEvent)">Save</button>
+        <button type="button" (click)="cancel()" class="btn btn-secondary" style="margin: 10px; height: 4em;">Cancel</button>
+      </div>
+    </div>
   </div>
-  <agm-map [latitude]="defaultLat" [longitude]="defaultLong" (mapClick)="onChoseLocation($event)">
-    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-  </agm-map>
-  <button type="button" (click)="cancel()" >cancel</button>
-  <button type="button" (click)="saveNewLocation(); save(calendarEvent)">save</button>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+          <th>Description</th>
+          <th>Address</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let event of events" (click)="getEvent(event)">
+          <td *ngIf="event.userId == currentUser">{{ event.title }}</td>
+          <td *ngIf="event.userId == currentUser">{{ event.description }}</td>
+          <td *ngIf="event.userId == currentUser">{{ event.address }}</td>
+          <td *ngIf="event.userId == currentUser">{{ event.date }}</td>
+          <td *ngIf="event.userId == currentUser" style="display: flex; justify-content: center"><button class="btn btn-danger" (click)="delete(event)">Delete</button></td>
+        </tr>
+        </tbody>
+      </table>
+        <agm-map [latitude]="defaultLat" [longitude]="defaultLong"  (mapClick)="onChoseLocation($event)">
+          <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+        </agm-map>
+  </div>
 </div>
+</main>
 
-<ng-template #other_content>
-  <div>
-    <label for="newevent-title">Title: </label>
-    <input id="newevent-title" #eventTitle placeholder="Title"/>
-    <label for="newevent-address">Address: </label>
-    <input id="newevent-address" #eventAddress placeholder="Address"/>
-    <label for="newevent-description">Description: </label>
-    <input id="newevent-description" #eventDescription placeholder="Description"/>
-    <label for="newevent-date">Date: </label>
-    <input type= 'date' id="newevent-date"  #eventDate  placeholder="Date"/>
+<ng-template #Add>
+  <div style="display:flex; justify-content: center; margin-left: 1em;align-items: center;">
+    <button type="button" class="btn btn-secondary" style="margin: 10px; height: 4em;" (click)="addEvent(calendarEvent.title, calendarEvent.address, calendarEvent.description, latitude, longitude, calendarEvent.date)">Add</button>
+    <button type="button" (click)="cancel()" class="btn btn-secondary" style="margin: 10px; height: 4em;">Cancel</button>
   </div>
-  <agm-map [latitude]="defaultLat" [longitude]="defaultLong"  (mapClick)="onChoseLocation($event)">
-    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-  </agm-map>
-  <button type="button" (click)="addEvent(eventTitle.value, eventAddress.value, eventDescription.value, latitude, longitude, eventDate.value);
-                          eventTitle.value=''; eventDescription.value=''; eventAddress.value=''; eventDate.value=''; latitude=''; longitude=''" >add</button>
 </ng-template>

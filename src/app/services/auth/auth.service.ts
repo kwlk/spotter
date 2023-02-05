@@ -21,7 +21,7 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result) => {
         if(result.user) {
-          this.router.navigate(['/events']);
+          this.router.navigate(['/map']);
         } else {
           this.afAuth.signOut();
           this.router.navigate(['/'])

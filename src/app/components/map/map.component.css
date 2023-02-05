@@ -1,4 +1,12 @@
 agm-map {
-  height: 400px;
+  height: 40em;
 }
 
+.events-list{
+  margin-bottom: 1.5em;
+}
+
+.event-details{
+  font-size: 20px;
+  margin-top: 1.5em;
+}
