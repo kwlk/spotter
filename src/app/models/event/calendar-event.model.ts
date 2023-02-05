@@ -3,7 +3,7 @@ export class CalendarEvent {
   userId?: string;
   title?: string;
   description?: string;
-  date?: number;  // kept as number of seconds
+  date?: string;  // kept as number of seconds
   longitude?: number;
   latitude?: number;
   address?: string;

@@ -31,7 +31,7 @@
             <th class="thead-dark">Date</th>
             <td>{{ event.date }}</td>
           </tr>
-        </table>    
+        </table>
       </div>
       <agm-map class="map" [latitude]="defaultLat" [longitude]="defaultLan" (mapClick)="toggleDisplay()" >
         <agm-marker [latitude]="event.latitude" [longitude]="event.longitude"

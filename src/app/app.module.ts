@@ -19,6 +19,7 @@ import {InMemoryDataService} from './services/inMemoryData/in-memory-data.servic
 import {UserPanelComponent} from './components/user-panel/user-panel/user-panel.component';
 import {FormsModule} from "@angular/forms";
 import { EventComponent } from './components/event/event.component';
+import { CalendarEventComponent } from './components/calendar-event/calendar-event.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { EventComponent } from './components/event/event.component';
     HeaderComponent,
     MapComponent,
     UserPanelComponent,
+    CalendarEventComponent,
     EventComponent,
   ],
   imports: [
