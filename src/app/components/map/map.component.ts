@@ -19,7 +19,7 @@ export class MapComponent {
   readonly defaultLan = 19.56;
   openedWindow : number = 0;
 
-  constructor(private eventService: EventService) {}
+  constructor(public eventService: EventService) {}
 
   toggleDisplay(event?: CalendarEvent) {
     //this.isDisplay= !this.isDisplay;
