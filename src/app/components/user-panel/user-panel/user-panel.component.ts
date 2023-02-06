@@ -13,8 +13,8 @@ export class UserPanelComponent implements OnInit {
 
   readonly defaultLat = 50.04;
   readonly defaultLong = 19.56;
-  latitude;
-  longitude;
+  latitude = null;
+  longitude = null;
   events: CalendarEvent[] = [];
   city: string;
   calendarEvent: CalendarEvent;
@@ -61,7 +61,7 @@ export class UserPanelComponent implements OnInit {
     // event.longitude = this.longitude;
   }
 
-  addEvent(title: string, address: string, description: string, lat: number, long: number, date: string): void {
+  addEvent(title: string, address: string, description: string, lat: number , long: number, date: string): void {
     this.newCalendarEvent();
     title = title.trim();
     address = address.trim();
