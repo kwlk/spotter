@@ -21,7 +21,7 @@ export class UserPanelComponent implements OnInit {
   isSelectedEvent: boolean;
   currentUser = getAuth().currentUser.uid;
 
-  constructor(private eventService: EventService) {
+  constructor(public eventService: EventService) {
   }
 
   ngOnInit(): void {
