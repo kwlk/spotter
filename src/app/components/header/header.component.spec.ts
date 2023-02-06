@@ -1,6 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HeaderComponent } from './header.component';
+import {HeaderComponent} from './header.component';
+import {AuthService} from "../../services/auth/auth.service";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from "../../../environments/environment";
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -8,9 +12,13 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ]
+      imports: [
+        AngularFireModule.initializeApp(environment.firebaseConfig)
+      ],
+      declarations: [HeaderComponent],
+      providers: [HeaderComponent, AuthService, AngularFireAuth]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
@@ -19,5 +27,9 @@ describe('HeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should create', () => {
+    expect(component.title).toEqual("Spotter");
   });
 });
