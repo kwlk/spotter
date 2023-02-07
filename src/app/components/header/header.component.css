@@ -1,32 +1,45 @@
+.login-div{
+  display: flex;
+  flex-direction: row;
+  width: 20%;
+  margin-right: 2em;
+}
+
+ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+@media screen and (max-width: 600px) {
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.ul-div{
+  width: 20%;
+  margin-left: 2em;
+}
+
+nav{
+  display: flex;
+  flex-direction: row;
+}
+
 .background {
   height: 100px;
   width: 100%;
 }
 
-.head {
-  border-bottom: 3px solid #1f6a7d9c;
-  padding: 15px;
-  width: 100%;
-  z-index: 99;
-  background: white;
-  position: -webkit-sticky;
-  position: fixed;
-  transition: 0.3s;
-  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+img-div {
+  width: 20%;
+  height: auto;
 }
-
-.profile-container {
-  width: 100%;
-  align-content: flex-end;
-  text-align: center;
-}
-
 img {
   width: 100px;
   height: 100px;
-  position: absolute;
-  left: 46%;
-  right: 50%;
 }
 
 a {

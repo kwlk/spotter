@@ -12,7 +12,9 @@ import {map} from "rxjs/operators";
 export class MapComponent {
 
   events: CalendarEvent[] = [];
+  filteredEvents: CalendarEvent[] = [];
   isDisplay = false;
+  searchValue: string;
   event : CalendarEvent;
   city: string;
   readonly defaultLat = 50.04;
@@ -53,6 +55,22 @@ fetch(apiUrl)
     return this.openedWindow == id;
   }
 
+  filterEvents() {
+    if (!this.searchValue) {
+      this.filteredEvents = [...this.events];
+    } else {
+        this.filteredEvents = this.events.filter(event => {
+          const eventProperties = Object.values(event);
+          for (const prop of eventProperties) {
+            if (typeof prop === 'string' && prop.toLowerCase().includes(this.searchValue.toLowerCase())) {
+              return true;
+            }
+          }
+          return false;
+        });
+      }
+    }
+
   getEvents(): void {
     this.eventService.getAll().snapshotChanges().pipe(
       map(changes =>
@@ -62,11 +80,13 @@ fetch(apiUrl)
       )
     ).subscribe(data => {
       this.events = data;
+      this.filterEvents();
     });
   }
 
 
   ngOnInit(): void {
+    this.searchValue = "";
     this.getEvents();
   }
 }
