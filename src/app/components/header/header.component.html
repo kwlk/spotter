@@ -1,20 +1,22 @@
-<nav class="navbar sticky-top navbar navbar-expand-lg navbar-light bg-light background">
-  <div class="container-fluid">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item ">
-          <a class="nav-link active" aria-current="page" href="">Home</a>
-        </li>
-        <li class="nav-item" *ngIf="afAuth.authState | async as user" >
-          <a class="nav-link text-nowrap active" aria-current="page" routerLink="/user-panel">User panel</a>
-        </li>
-      </ul>
-      <img src="assets/spotter_logo.svg" alt="logo" class="navbar-nav justify-content-center" svgIcon="spotter_logo" style="display: inline-block;" routerLink="/">
-      <div class="profile-container d-flex flex-row-reverse" *ngIf="afAuth.authState | async as user">
+<nav class="navbar sticky-top navbar navbar-light bg-light background">
+      <div class="ul-div">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item ">
+            <a class="nav-link active" aria-current="page" href="">Home</a>
+          </li>
+          <li class="nav-item" *ngIf="afAuth.authState | async as user" >
+            <a class="nav-link text-nowrap active" aria-current="page" routerLink="/user-panel">User panel</a>
+          </li>
+        </ul>
+      </div>
+      <div class="img-div">
+        <img src="assets/spotter_logo.svg" alt="logo" svgIcon="spotter_logo" routerLink="/">
+      </div>
+      <div class="login-div" *ngIf="afAuth.authState | async as user">
         <div>
           <span class="p-2"> User: </span>
           <span class="p-2">{{user.displayName}}</span>
-          <span class="p-2 "><button class="w-20 btn btn-lg btn-primary" (click)="authService.signOut()">Sign out</button></span>
         </div>
+        <button class="w-20 btn btn-lg btn-primary" (click)="authService.signOut()">Sign out</button>
       </div>
-  </div>
 </nav>

@@ -6,7 +6,8 @@
       </div>
     </div>
   </section>
-    <h2 class="fw-light" style="display: flex; justify-content: center;margin-bottom: 1em;">Add or Edit</h2>
+
+  <h2 class="fw-light" style="display: flex; justify-content: center;margin-bottom: 1em;">Add or Edit</h2>
   <div style="  display: flex; flex-direction: row; justify-content: center; margin-bottom: 2em;">
     <div>
       <div style="display: flex; flex-direction: row;">
@@ -36,6 +37,12 @@
       </div>
     </div>
   </div>
+  <div *ngIf="isSelectedEvent; else MapDefault">
+    <agm-map [latitude]="defaultLat" [longitude]="defaultLong"  (mapClick)="onChoseLocation($event)">
+      <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+    </agm-map>
+  </div>
+
 
   <div class="album py-5 bg-light">
     <div class="container">
@@ -59,11 +66,6 @@
         </tr>
         </tbody>
       </table>
-      <div *ngIf="isSelectedEvent; else MapDefault">
-        <agm-map [latitude]="defaultLat" [longitude]="defaultLong"  (mapClick)="onChoseLocation($event)">
-          <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-        </agm-map>
-      </div>
     </div>
   </div>
 </main>

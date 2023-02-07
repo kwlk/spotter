@@ -7,6 +7,20 @@ agm-map {
 }
 
 .event-details{
+  max-height: 30em;
   font-size: 20px;
   margin-top: 1.5em;
+  margin-bottom: 1em;
+}
+
+.search-div{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.search-div>div{
+  width: 40%;
+  display: flex;
+  flex-direction: row;
 }
