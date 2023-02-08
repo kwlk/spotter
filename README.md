@@ -28,7 +28,9 @@ Wydarzeniem nazywamy każdy nową wartość dodaną do aplikacji. Użytkownik, w
 Kluczowym założeniem w trakcie projektowania naszej aplikacji było maksymalne uproszczenie UX i UI, aby wyeliminować tak zwaną „barierę wejścia”. Aplikacja miała być czytelna i zaraz po załadowaniu naszego serwisu, użytkownik powinien intuicyjnie potrafić się po nim poruszać. Bazując na tych założeniach, nasza aplikacja opiera się na 2 kluczowych stronach.
 
 ### Widok listy wydarzeń
-Główna strona  eventów, która składa się z listy wydarzeń  wyświetlonej w formie czytelnych “kafelków”, na których znajdują się najważniejsze informacje na temat wydarzenia. Każdy kafelek zawiera takie pola jak: nazwa wydarzenia, opis, datę. Po kliknięciu w wybrany kafelek wyświetlane są dodatkowe szczegóły na temat wydarzenia tj. adres, miasto. Pod listą wydarzeń znajduje się mapa, na której użytkownik może podejrzeć, gdzie znajduje się interesujące go wydarzenie. Interakcja również może odbywać się za pośrednictwem mapy. Na mapie znajdują się wydarzenia w formie “pinezek” po kliknięciu w pinezkę wyświetlane są szczegóły tego wydarzenia. 
+Główna strona  eventów, która składa się z listy wydarzeń  wyświetlonej w formie czytelnych “kafelków”, na których znajdują się najważniejsze informacje na temat wydarzenia. Każdy kafelek zawiera takie pola jak: nazwa wydarzenia, opis, datę. Po kliknięciu w wybrany kafelek wyświetlane są dodatkowe szczegóły na temat wydarzenia tj. adres, miasto. Pod listą wydarzeń znajduje się mapa, na której użytkownik może podejrzeć, gdzie znajduje się interesujące go wydarzenie. Interakcja również może odbywać się za pośrednictwem mapy. Na mapie znajdują się wydarzenia w formie “pinezek” po kliknięciu w pinezkę wyświetlane są szczegóły tego wydarzenia. Dodatkowo, użytkowanik ma możliwość wyszukiwania wydarzeń z listy przez wpisanie fragmentów poszukiwanej frazy, takich jak: data, nazwa, adres bądź opis.
+
+![lista](images/search.png)
 
 ### Panel użytkownika
 Do panelu użytkownika mają dostęp tylko zalogowani użytkownicy. Przechodząc do zakładki “User Panel”, użytkownik może podejrzeć utworzone przez siebie wydarzenia. W łatwy sposób może usunąć, dodać nowe lub zaktualizować wydarzenie. Użytkownik ma dostęp do mapy, na której również może modyfikować położenie “pinezki” symbolizującej wybrane wydarzenie.
@@ -48,11 +50,15 @@ Nasza aplikacja posiada funkcjonalności, które okazują się proste oraz intui
 2. Po  zlokalizowaniu interesującego nas wydarzenia należy najechać na niego myszką, a następnie wcisnąć lewy przycisk myszy.
 3. W obszarze pomiędzy listą wydarzeń i mapą zostaną wyświetlone szczegóły wybranego wydarzenia.
 
+![wybor eventy](images/event.png)
+
 ### Dodawanie eventu (user panel):
 1. W celu skorzystania z panelu użytkownika wymagane jest zalogowanie się do aplikacji. W tym celu należy wybrać przycisk “Authenticate with Google” znajdującego się 2. na stronie głównej. 
 3. Po zalogowaniu, na  pasku nawigacji wyświetli się zakładka “User panel”, należy wybrać tę opcję.
 4. W celu dodania wydarzenia należy wypełnić formularz znajdujący się na stronie oraz  wybrać lokalizację eventu na mapie (opcjonalnie).
 5. Następnie zatwierdzamy nowe wydarzenie za pomocą przycisku “Add”.
+
+![add or edit](images/add_or_edit.png)
 
 ### Edycja eventu (user panel):
 1. W celu skorzystania z panelu użytkownika wymagane jest zalogowanie się do aplikacji.W tym celu należy wybrać przycisk “Authenticate with Google” znajdującego się na stronie głównej. 
@@ -62,3 +68,4 @@ Nasza aplikacja posiada funkcjonalności, które okazują się proste oraz intui
 5. Edycji dokonujemy, dowolnie modyfikując pola w formularzu. W celu zmiany lokalizacji na mapie wystarczy kliknąć w dowolną lokalizację. 
 6. Następnie zatwierdzamy edytowane wydarzenie za pomocą przycisku “Save”.
 
+![edit](images/edit.png)
